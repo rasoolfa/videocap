@@ -29,16 +29,16 @@ local cmd = torch.CmdLine()
 -- Dataset options
 cmd:option('-input_h5', '')
 cmd:option('-json_file', '')
-cmd:option('-dname', 'msr_vtt', 'dataset name that will be used here')
+cmd:option('-dname', ‘yt’, 'dataset name that will be used here')
 
 -- Video Feature options
 cmd:option('-feat_method', 'caffe_pool')
 cmd:option('-cnn_model','')
 cmd:option('-cnn_proto', '')
 
-cmd:option('-cnn_name', 'VGG-16')  -- Since feature extraction would be different for google.net/VGG/resent 
-cmd:option('-cnn_layer_name', 'conv5_3')  -- Since feature extraction would be different for google.net/VGG/resent
-cmd:option('-layer_num', 38)  -- Since feature extraction would be different for google.net/VGG/resent 
+cmd:option('-cnn_name', 'VGG-16')   
+cmd:option('-cnn_layer_name', 'relu5_4') 
+cmd:option('-layer_num', 42)   
 
 cmd:option('-cnn_input_size', 224) --All those pre-trained nets accepts 224, to be easily extensible to new network
 cmd:option('-input_encoding_size', 512, 'to map from video features to LSTM state')    --Encoding for weight between video and LSTM
@@ -46,42 +46,41 @@ cmd:option('-input_encoding_size', 512, 'to map from video features to LSTM stat
 --cmd:option('-tiny_save', 2, 'if 1 means only avg features will be saved in dataprepation step, 2 means cnn FC7 features without avg')
 
 -- Optimization options
-cmd:option('-batch_size', 5)
-cmd:option('-seq_per_img', 1, 'number of captions to sample for each image during training.[**Not using this parameter**]')
+cmd:option('-batch_size', 16)
 cmd:option('-dropout', 0.5,'Dropout rate for RNN to apply over non-recurrent weights')
-cmd:option('-grad_clip', 0.1,'clip gradients at this value') -- to overcome exploding gradient, clamp the grads 
-cmd:option('-weight_decay', 0, 'L2 just for the encoding layer') -- to overcome exploding gradient, clamp teh grads 
-cmd:option('-lr_decay_every', 10, 'to decay learning rate')
-cmd:option('-lr_decay_factor', 0.5, 'learning rate decay factor')
-cmd:option('-max_epoch', 100, 'max number of epoch')
-cmd:option('-learning_rate', 1e-3, 'learning_rate')
+cmd:option('-grad_clip', 2,'clip gradients at this value') -- to overcome exploding gradient, clamp the grads 
+cmd:option('-weight_decay', 0, 'L2 just for the encoding layer') -- to overcome exploding gradient, clamp the grads 
+cmd:option('-lr_decay_every', 200, 'to decay learning rate')
+cmd:option('-lr_decay_factor', 0.1, 'learning rate decay factor')
+cmd:option('-max_epoch', 400, 'max number of epoch')
+cmd:option('-learning_rate', 2e-05, 'learning_rate')
 cmd:option('-optim','adam','what update to use? rmsprop|sgd|sgdmom|adagrad|adam')
 cmd:option('-optim_alpha',0.8,'alpha for adagrad/rmsprop/momentum/adam')
-cmd:option('-adam_beta1',0.9,'beta used for adam')
+cmd:option('-adam_beta1’,0.8,’beta used for adam')
 cmd:option('-adam_beta2',0.999,'beta used for adam')
 cmd:option('-optim_epsilon',1e-8,'epsilon that goes into denominator for smoothing')
-cmd:option('-mem_size', 200, 'number of hidden nodes in Memory Network')
+cmd:option('-mem_size', 797, 'number of hidden nodes in Memory Network')
 cmd:option('-mem_layers', 1, 'number of Memory layers')
-cmd:option('-lr_cap',1e-7,'learning rate cap')
-cmd:option('-weightDecayOptim',0, 'weight Decay for L2 inside optim modules')
+cmd:option('-lr_cap',1e-10,'learning rate cap')
+cmd:option('-weightDecayOptim',1e-05, 'weight Decay for L2 inside optim modules')
 
 -- Model options
 cmd:option('-model_type', 'lstm')
-cmd:option('-rnn_size', 512,'Number of hidden nodes in RNN in each layer')
-cmd:option('-num_layers', 1,'Number of RNN layers')
+cmd:option('-rnn_size', 1479,’Number of hidden nodes in RNN in each layer')
+cmd:option('-num_layers', 2,'Number of RNN layers')
 cmd:option('-sample_max', 1)
 cmd:option('-temperature', 1.0)
 cmd:option('-beam_size', 1)
 cmd:option('-init_type_loc', 'nnet', 'Init the h0 and c0 with zero or nnet')
-cmd:option('-embed_size', 256, 'this is word embedding size')
+cmd:option('-embed_size', 402, 'this is word embedding size')
 
 -- Log options
 cmd:option('-print_every', 100, 'How often to log the print out stuffs duirng train and validation')
 cmd:option('-seed', 1234 , 'This is would be used to make the result reproducible')
-cmd:option('-checkpoint_every', 10000, 'how often to save a model checkpoint?')
+cmd:option('-checkpoint_every', 600, 'how often to save a model checkpoint?')
 cmd:option('-checkpoint_name', 'cv/checkpoint')
 cmd:option('-init_from', '', 'path to a model checkpoint to initialize model weights from. Empty = don\'t')
-cmd:option('-lang_eval_method', 'CIDEr', 'BLEU/CIDEr/METEOR/ROUGE_L?')
+cmd:option('-lang_eval_method', 'METEOR', 'BLEU/CIDEr/METEOR/ROUGE_L?')
 cmd:option('-losses_log_every', 25, 'How often to log the loss value (0 = disable)')
 cmd:option('-log_id', '0', 'an id identifying this run/job. used in cross-val and appended when writing progress files')
 cmd:option('-speed_benchmark', 1, 'use to time the forward/backward execution')
@@ -89,8 +88,8 @@ cmd:option('-f_gt','', 'this file is used as ground truth')
 
 
 -- Backend options
-cmd:option('-gpu_id', -1)
-cmd:option('-gpu_backend', 'nn','can be cuda|nn|cudnn')
+cmd:option('-gpu_id', 0)
+cmd:option('-gpu_backend', ‘cuda’,’can be cuda|nn|cudnn')
 cmd:text()
 
 local opt = cmd:parse(arg)
