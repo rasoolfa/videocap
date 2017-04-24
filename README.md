@@ -1,7 +1,7 @@
 # Introduction
 This repository implements the method which is presented in the following paper:
-Memory-augmented Attention Modelling for Videos
-https://arxiv.org/abs/1611.02261
+- Memory-augmented Attention Modelling for Videos
+- https://arxiv.org/abs/1611.02261
 
 If you find this code useful in your research, please cite:
 ```
