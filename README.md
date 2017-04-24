@@ -3,6 +3,22 @@ This repository implements the method which is presented in the following paper:
 Memory-augmented Attention Modelling for Videos
 https://arxiv.org/abs/1611.02261
 
+If you find this code useful in your research, please cite:
+```
+@article{Fakoor16,
+  author    = {Rasool Fakoor and
+               Abdel{-}rahman Mohamed and
+               Margaret Mitchell and
+               Sing Bing Kang and
+               Pushmeet Kohli},
+  title     = {Memory-augmented Attention Modelling for Videos},
+  journal   = {CoRR},
+  volume    = {abs/1611.02261},
+  year      = {2016},
+  url       = {http://arxiv.org/abs/1611.02261},
+}
+```
+
 ## Code setup
 
 ### Step 0) Install required packages
@@ -62,25 +78,13 @@ CUDA_VISIBLE_DEVICES=0 th train_SeqToSeq_MeMLocSoft_R2.lua -cnn_proto ~/Data/vgg
 
 CUDA_VISIBLE_DEVICES=0 th eval_SeqToSeq_MemLocSoft_R2.lua -gpu_id 0 -split test -input_h5 ~/Data/Y_8_data/YT_8_len30.h5 -json_file ~/Data/Y_8_data/YT_8_len30.json -f_gt Youtube/YT_40_captions_test.json -gpu_backend cuda  -checkpoint_name ~/Data/cv/yt_test  -init_from /Data/cv/yt_n/mylog_mlsnnet_y_w11111.t7
 
-If you find this code useful in your research, please cite:
-```
-@article{Fakoor16,
-  author    = {Rasool Fakoor and
-               Abdel{-}rahman Mohamed and
-               Margaret Mitchell and
-               Sing Bing Kang and
-               Pushmeet Kohli},
-  title     = {Memory-augmented Attention Modelling for Videos},
-  journal   = {CoRR},
-  volume    = {abs/1611.02261},
-  year      = {2016},
-  url       = {http://arxiv.org/abs/1611.02261},
-}
-```
 
 ## Acknowledgements
 
-The structure of this codebase is inspired by https://github.com/karpathy/neuraltalk2. In addation, some functions from https://github.com/karpathy/neuraltalk2 have been re-written/changed in this codebase which are [mostly] excpliclty mentioned in my code. 
+The structure of this codebase is inspired by https://github.com/karpathy/neuraltalk2. In addation, some functions from https://github.com/karpathy/neuraltalk2 have been re-written/changed in this codebase which are [mostly] excpliclty mentioned in my code.
+
+
+Please contact me (@rasoolfa) if you find a bug or problem with this code.
 
 
 
