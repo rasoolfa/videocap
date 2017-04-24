@@ -49,7 +49,7 @@ Download the following folders and add them to eval_caption/
 Download Data from 
 http://upplysingaoflun.ecn.purdue.edu/~yu239/datasets/youtubeclips.zip
 
-Download  VGG16 pretrained model in ~/Data/vgg_pre:
+Download VGG16 pretrained model and copy in ~/Data/vgg_pre:
 http://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_16_layers.caffemodel
 
 #### Step 2) unzip data:
