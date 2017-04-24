@@ -3,7 +3,7 @@ Memory-augmented Attention Modelling for Videos
 
 ## Code setup
 
-### Step 0) Install require packages
+### Step 0) Install required packages
 
 sudo add-apt-repository ppa:mc3man/trusty-media
 sudo apt-get update 
@@ -77,7 +77,7 @@ If you find this code useful in your research, please cite:
 
 ## Acknowledgements
 
-The structure of this codebase is inspired by https://github.com/karpathy/neuraltalk2. In addation, some functions from the https://github.com/karpathy/neuraltalk2 have been used in this codebase which are [mostly]excpliclty mentioned in my code. 
+The structure of this codebase is inspired by https://github.com/karpathy/neuraltalk2. In addation, some functions from https://github.com/karpathy/neuraltalk2 have been re-written/changed in this codebase which are [mostly] excpliclty mentioned in my code. 
 
 
 
