@@ -1,5 +1,7 @@
-# videocap
+# Introduction
+This repository implements the method which is presented in the following paper:
 Memory-augmented Attention Modelling for Videos
+https://arxiv.org/abs/1611.02261
 
 ## Code setup
 
