@@ -58,9 +58,9 @@ let's assume data are in ~/Data/youtubeclips-dataset
 
 #### Step 3) Prepare data [it takes a couple of hours]
 -create the following folders
-mdkir ~/Data/YouTubeClip_mp4
-mkdir ~/Data/Youtube_frames_8 
-mkdir ~/Data/Y_8_data
+- mdkir ~/Data/YouTubeClip_mp4
+- mkdir ~/Data/Youtube_frames_8 
+- mkdir ~/Data/Y_8_data
 
 python -u scripts/convert_aviTompg.py --video_dir ~/Data/youtubeclips-dataset --output ~/Data/YouTubeClip_mp4 
 python -u scripts/build_frames.py  --clip_dir ~/Data/YouTubeClip_mp4  --output ~/Data/Youtube_frames_8 --num_frames 8 --frame_type continuous 
