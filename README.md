@@ -21,13 +21,14 @@ sudo apt-get install python-opencv
 #### install torch 
 luarocks install torch && luarocks install image && luarocks install sys && luarocks install nn && luarocks install optim && luarocks install lua-cjson && luarocks install cutorch  && luarocks install cunn  && luarocks install loadcaffe
 
-#### Go to https://github.com/tylin/coco-caption/tree/master/pycocoevalcap
+#### Add coco-caption eval codes 
+Go to https://github.com/tylin/coco-caption/tree/master/pycocoevalcap
 Download the following folders and add them to eval_caption/
-bleu/
-cider/
-meteor/
-rouge/
-tokenizer/
+- bleu/
+- cider/
+- meteor/
+- rouge/
+- tokenizer/
 
 #### Step 1)
 Download Data from 
